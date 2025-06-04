@@ -12,87 +12,64 @@
         }
 
         :root {
-            --primary-gold: #ffd700;
-            --deep-gold: #b8860b;
-            --accent-red: #dc2626;
-            --crimson-glow: #ef4444;
-            --rich-black: #0a0a0a;
-            --darker-black: #000000;
-            --warm-white: #fef7cd;
-            --muted-gold: #ca8a04;
-            --glass-gold: rgba(255, 215, 0, 0.05);
-            --glass-red: rgba(220, 38, 38, 0.05);
-            --border-gold: rgba(255, 215, 0, 0.2);
-            --border-red: rgba(220, 38, 38, 0.2);
+            --primary-blue: #0066ff;
+            --secondary-blue: #0052cc;
+            --accent-cyan: #00d4ff;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --light-text: #ffffff;
+            --gray-text: #a0a0a0;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         body {
-            font-family: 'Orbitron', 'Exo 2', sans-serif;
-            background: var(--rich-black);
-            color: var(--warm-white);
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--dark-bg);
+            color: var(--light-text);
             line-height: 1.6;
             overflow-x: hidden;
-            font-weight: 400;
         }
 
-        /* Cyberpunk background with gold/red energy */
-        .background-energy {
+        /* Animated background */
+        .background-animation {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: 
-                radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, rgba(220, 38, 38, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 60% 10%, rgba(255, 215, 0, 0.05) 0%, transparent 30%),
-                linear-gradient(135deg, var(--rich-black), var(--darker-black));
-            animation: energyFlow 8s ease-in-out infinite alternate;
+            background: linear-gradient(45deg, var(--dark-bg), var(--darker-bg));
         }
 
-        .background-energy::before {
+        .background-animation::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                linear-gradient(45deg, transparent 48%, rgba(255, 215, 0, 0.02) 49%, rgba(255, 215, 0, 0.02) 51%, transparent 52%),
-                linear-gradient(-45deg, transparent 48%, rgba(220, 38, 38, 0.02) 49%, rgba(220, 38, 38, 0.02) 51%, transparent 52%);
-            background-size: 60px 60px;
-            animation: gridShift 15s linear infinite;
+            background: radial-gradient(circle at 20% 80%, rgba(0, 102, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite alternate;
         }
 
-        @keyframes energyFlow {
-            0% { 
-                filter: hue-rotate(0deg) brightness(1);
-                transform: scale(1);
-            }
-            100% { 
-                filter: hue-rotate(10deg) brightness(1.1);
-                transform: scale(1.02);
-            }
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.8; }
         }
 
-        @keyframes gridShift {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(60px, 60px); }
-        }
-
-        /* Futuristic header */
+        /* Header */
         header {
             position: fixed;
             top: 0;
             width: 100%;
             padding: 20px 40px;
-            background: rgba(10, 10, 10, 0.9);
+            background: rgba(10, 10, 10, 0.8);
             backdrop-filter: blur(20px);
-            border-bottom: 2px solid transparent;
-            border-image: linear-gradient(90deg, var(--primary-gold), var(--accent-red), var(--primary-gold)) 1;
+            border-bottom: 1px solid var(--glass-border);
             z-index: 1000;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
         }
 
         nav {
@@ -106,17 +83,10 @@
         .logo {
             font-size: 32px;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--primary-gold), var(--crimson-glow));
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-            animation: logoGlow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes logoGlow {
-            0% { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5)); }
-            100% { filter: drop-shadow(0 0 20px rgba(220, 38, 38, 0.5)); }
         }
 
         .nav-links {
@@ -126,176 +96,104 @@
         }
 
         .nav-links a {
-            color: var(--warm-white);
+            color: var(--light-text);
             text-decoration: none;
             font-weight: 500;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease;
             position: relative;
-            padding: 8px 0;
-        }
-
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary-gold), var(--accent-red));
-            transition: width 0.4s ease;
-        }
-
-        .nav-links a:hover::before {
-            width: 100%;
         }
 
         .nav-links a:hover {
-            color: var(--primary-gold);
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            color: var(--accent-cyan);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-cyan);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .lang-switch {
-            background: linear-gradient(135deg, var(--glass-gold), var(--glass-red));
-            border: 1px solid var(--border-gold);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             border-radius: 25px;
-            padding: 10px 24px;
-            color: var(--warm-white);
+            padding: 8px 20px;
+            color: var(--light-text);
             cursor: pointer;
             transition: all 0.3s ease;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 12px;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .lang-switch::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary-gold), var(--accent-red));
-            transition: left 0.4s ease;
-            z-index: -1;
-        }
-
-        .lang-switch:hover::before {
-            left: 0;
+            font-weight: 500;
         }
 
         .lang-switch:hover {
-            color: var(--rich-black);
+            background: var(--primary-blue);
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
         }
 
-        /* Epic hero section */
-        .hero {
-            padding: 240px 40px 160px;
-            text-align: center;
+        /* Main sections */
+        .section {
+            padding: 120px 40px;
             max-width: 1400px;
             margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 200px 40px 120px;
             position: relative;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
-            transform: translate(-50%, -50%);
-            animation: pulse 4s ease-in-out infinite;
-            z-index: -1;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
-        }
-
         .hero h1 {
-            font-size: clamp(64px, 12vw, 140px);
-            font-weight: 900;
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 800;
             margin-bottom: 30px;
-            background: linear-gradient(135deg, var(--primary-gold), var(--crimson-glow), var(--deep-gold));
+            background: linear-gradient(135deg, var(--light-text), var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
-            animation: heroGlow 2s ease-in-out infinite alternate;
-            letter-spacing: -2px;
-        }
-
-        @keyframes heroGlow {
-            0% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6)); }
-            100% { filter: drop-shadow(0 0 30px rgba(220, 38, 38, 0.6)); }
+            animation: fadeInUp 1s ease;
         }
 
         .hero .subtitle {
             font-size: 24px;
-            color: var(--muted-gold);
-            margin-bottom: 40px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-weight: 600;
-            animation: fadeInUp 1s ease 0.5s both;
+            color: var(--gray-text);
+            margin-bottom: 50px;
+            animation: fadeInUp 1s ease 0.2s both;
         }
 
         .hero .description {
             font-size: 18px;
-            color: rgba(254, 247, 205, 0.8);
+            color: var(--gray-text);
             max-width: 800px;
-            margin: 0 auto 60px;
-            line-height: 1.8;
-            animation: fadeInUp 1s ease 0.7s both;
+            margin: 0 auto 50px;
+            animation: fadeInUp 1s ease 0.4s both;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 20px 50px;
-            background: linear-gradient(135deg, var(--primary-gold), var(--accent-red));
-            color: var(--rich-black);
+            padding: 18px 40px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-cyan));
+            color: white;
             text-decoration: none;
             border-radius: 50px;
-            font-weight: 700;
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.4s ease;
-            animation: fadeInUp 1s ease 0.9s both;
-            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--accent-red), var(--primary-gold));
-            transition: left 0.4s ease;
-            z-index: -1;
-        }
-
-        .cta-button:hover::before {
-            left: 0;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.6s both;
+            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3);
         }
 
         .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(220, 38, 38, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 102, 255, 0.4);
         }
 
         @keyframes fadeInUp {
@@ -309,302 +207,190 @@
             }
         }
 
-        /* Materials section with cyberpunk styling */
-        .section {
-            padding: 120px 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
+        /* Materials showcase */
         .materials {
-            background: linear-gradient(135deg, var(--glass-gold), var(--glass-red));
-            border: 2px solid transparent;
-            border-image: linear-gradient(135deg, var(--border-gold), var(--border-red)) 1;
-            border-radius: 20px;
+            background: var(--glass-bg);
+            border-radius: 30px;
             padding: 80px 60px;
             margin: 80px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .materials::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.02), transparent);
-            animation: scanLine 6s linear infinite;
-        }
-
-        @keyframes scanLine {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
         }
 
         .materials h2 {
-            font-size: 56px;
-            font-weight: 800;
+            font-size: 48px;
+            font-weight: 700;
             text-align: center;
-            margin-bottom: 80px;
-            background: linear-gradient(135deg, var(--primary-gold), var(--crimson-glow));
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, var(--light-text), var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-            position: relative;
-            z-index: 1;
         }
 
         .materials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 80px;
-            position: relative;
-            z-index: 1;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
         }
 
         .material-card {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.03), rgba(220, 38, 38, 0.03));
-            border: 1px solid var(--border-gold);
-            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
             padding: 40px;
-            transition: all 0.4s ease;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .material-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .material-card:hover::before {
-            left: 100%;
         }
 
         .material-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: var(--accent-red);
-            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
         .material-card h3 {
             font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--primary-gold);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--accent-cyan);
         }
 
         .material-card p {
-            color: rgba(254, 247, 205, 0.9);
+            color: var(--gray-text);
             line-height: 1.8;
-            font-size: 15px;
         }
 
-        /* Microscope section with holographic feel */
+        /* Microscope images */
         .microscope-section {
             text-align: center;
-            margin: 100px 0;
-            position: relative;
-            z-index: 1;
+            margin: 80px 0;
         }
 
         .microscope-section h3 {
-            font-size: 42px;
-            font-weight: 700;
-            margin-bottom: 50px;
-            background: linear-gradient(135deg, var(--primary-gold), var(--accent-red));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            color: var(--light-text);
         }
 
         .microscope-images {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 40px;
-            margin-top: 60px;
+            margin-top: 40px;
         }
 
         .microscope-card {
-            background: linear-gradient(135deg, var(--glass-gold), var(--glass-red));
-            border: 2px solid var(--border-gold);
+            background: var(--glass-bg);
             border-radius: 20px;
             padding: 30px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .microscope-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 40%, rgba(255, 215, 0, 0.1) 50%, transparent 60%);
-            transform: translateX(-100%);
-            transition: transform 0.8s ease;
-        }
-
-        .microscope-card:hover::after {
-            transform: translateX(100%);
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
         }
 
         .microscope-card:hover {
-            transform: scale(1.05) rotateY(5deg);
-            border-color: var(--accent-red);
-            box-shadow: 0 30px 60px rgba(220, 38, 38, 0.3);
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .microscope-image {
+            width: 100%;
+            height: 300px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .microscope-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .microscope-card:hover .microscope-image img {
+            transform: scale(1.1);
         }
 
         .microscope-placeholder {
             width: 100%;
-            height: 300px;
-            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
-            border-radius: 15px;
+            height: 100%;
+            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--muted-gold);
+            color: var(--gray-text);
             font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            border: 2px dashed var(--border-gold);
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            border: 2px dashed var(--glass-border);
         }
 
-        /* Contact section with energy theme */
+        /* Contact section */
         .contact {
-            background: linear-gradient(135deg, var(--primary-gold), var(--accent-red));
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
             border-radius: 30px;
             padding: 80px 60px;
             margin: 80px 0;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 30% 70%, rgba(0, 0, 0, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 70% 30%, rgba(0, 0, 0, 0.1) 0%, transparent 50%);
-            animation: contactGlow 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes contactGlow {
-            0% { opacity: 0.5; }
-            100% { opacity: 1; }
         }
 
         .contact h2 {
-            font-size: 56px;
-            font-weight: 800;
-            margin-bottom: 30px;
-            color: var(--rich-black);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 1;
-        }
-
-        .contact > p {
-            color: rgba(0, 0, 0, 0.8);
+            font-size: 48px;
+            font-weight: 700;
             margin-bottom: 60px;
-            font-size: 18px;
-            position: relative;
-            z-index: 1;
         }
 
         .founders {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
             margin-top: 60px;
-            position: relative;
-            z-index: 1;
         }
 
         .founder-card {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 20px;
             padding: 40px;
-            border: 2px solid rgba(0, 0, 0, 0.3);
-            transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
         }
 
         .founder-card:hover {
-            transform: translateY(-8px);
-            background: rgba(0, 0, 0, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
         }
 
         .founder-card h3 {
             font-size: 24px;
-            font-weight: 700;
+            font-weight: 600;
             margin-bottom: 10px;
-            color: var(--rich-black);
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .founder-card .title {
-            color: var(--rich-black);
-            font-weight: 600;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            font-size: 14px;
-            letter-spacing: 1px;
+            color: var(--accent-cyan);
+            font-weight: 500;
+            margin-bottom: 20px;
         }
 
         .founder-card .contact-info {
-            color: rgba(0, 0, 0, 0.8);
-            font-weight: 500;
-        }
-
-        .founder-card .contact-info p {
-            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .founder-card .contact-info a {
-            color: rgba(0, 0, 0, 0.8);
+            color: white;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .founder-card .contact-info a:hover {
-            color: var(--rich-black);
+            color: var(--accent-cyan);
         }
 
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+        /* Language toggle */
+        .hidden {
+            display: none;
         }
 
         /* Responsive design */
@@ -618,107 +404,114 @@
             }
             
             .hero {
-                padding: 200px 20px 120px;
+                padding: 150px 20px 80px;
             }
             
             .microscope-images {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-            
-            .materials-grid {
-                grid-template-columns: 1fr;
-            }
         }
 
-        .hidden {
-            display: none;
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <div class="background-energy"></div>
+    <div class="background-animation"></div>
     
     <header>
         <nav>
-            <div class="logo">YouWoo | 酉午</div>
+            <div class="logo" id="logo">YouWoo | 酉午</div>
             <div class="nav-links">
-                <a href="#home" class="nav-link" data-en="Home" data-zh="首页">Home</a>
-                <a href="#materials" class="nav-link" data-en="Materials" data-zh="材料">Materials</a>
-                <a href="#contact" class="nav-link" data-en="Contact" data-zh="联系">Contact</a>
-                <button class="lang-switch" onclick="toggleLanguage()">中文</button>
+                <a href="#home" class="nav-link" id="nav-home">Home</a>
+                <a href="#materials" class="nav-link" id="nav-materials">Materials</a>
+                <a href="#contact" class="nav-link" id="nav-contact">Contact</a>
+                <button class="lang-switch" onclick="toggleLanguage()" id="lang-btn">中文</button>
             </div>
         </nav>
     </header>
 
     <main>
+        <!-- Hero Section -->
         <section id="home" class="hero">
-            <h1 class="hero-title" data-en="YouWoo" data-zh="酉午">YouWoo</h1>
-            <p class="subtitle" data-en="Advanced Materials Technology" data-zh="先进材料科技">Advanced Materials Technology</p>
-            <p class="description" data-en="Pioneering the future of inorganic non-metallic materials with cutting-edge research in nitrides, ceramics, and oxides" data-zh="专注氮化物、陶瓷、氧化物等无机非金属前沿材料的突破性研究，引领材料科技未来">Pioneering the future of inorganic non-metallic materials with cutting-edge research in nitrides, ceramics, and oxides</p>
-            <a href="#materials" class="cta-button" data-en="Discover Innovation" data-zh="发现创新">Discover Innovation</a>
+            <h1 class="hero-title" id="hero-title">YouWoo</h1>
+            <p class="subtitle" id="hero-subtitle">Advanced Materials Technology</p>
+            <p class="description" id="hero-description">Pioneering the future of inorganic non-metallic materials with cutting-edge research in nitrides, ceramics, and oxides</p>
+            <a href="#materials" class="cta-button" id="hero-cta">Explore Our Materials</a>
         </section>
 
+        <!-- Materials Section -->
         <section id="materials" class="section">
             <div class="materials fade-in">
-                <h2 data-en="Material Excellence" data-zh="材料卓越">Material Excellence</h2>
+                <h2 id="materials-title">Our Focus Areas</h2>
                 <div class="materials-grid">
                     <div class="material-card">
-                        <h3 data-en="Nitrides" data-zh="氮化物">Nitrides</h3>
-                        <p data-en="Revolutionary nitride materials engineered with exceptional hardness, thermal stability, and electrical properties for next-generation applications." data-zh="具有卓越硬度、热稳定性和电学性能的革命性氮化物材料，适用于下一代应用。">Revolutionary nitride materials engineered with exceptional hardness, thermal stability, and electrical properties for next-generation applications.</p>
+                        <h3 id="nitrides-title">Nitrides</h3>
+                        <p id="nitrides-description">Advanced nitride materials with exceptional hardness, thermal stability, and electrical properties for cutting-edge applications.</p>
                     </div>
                     <div class="material-card">
-                        <h3 data-en="Ceramics" data-zh="陶瓷">Ceramics</h3>
-                        <p data-en="Ultra-high performance ceramic materials designed for extreme environments and cutting-edge industrial applications." data-zh="专为极端环境和前沿工业应用设计的超高性能陶瓷材料。">Ultra-high performance ceramic materials designed for extreme environments and cutting-edge industrial applications.</p>
+                        <h3 id="ceramics-title">Ceramics</h3>
+                        <p id="ceramics-description">High-performance ceramic materials engineered for extreme environments and specialized industrial applications.</p>
                     </div>
                     <div class="material-card">
-                        <h3 data-en="Oxides" data-zh="氧化物">Oxides</h3>
-                        <p data-en="Breakthrough oxide materials with precisely tailored properties for electronics, energy storage, and advanced catalysis." data-zh="具有精确定制特性的突破性氧化物材料，适用于电子、储能和先进催化。">Breakthrough oxide materials with precisely tailored properties for electronics, energy storage, and advanced catalysis.</p>
+                        <h3 id="oxides-title">Oxides</h3>
+                        <p id="oxides-description">Innovative oxide materials with tailored properties for electronics, energy storage, and catalysis applications.</p>
                     </div>
                 </div>
                 
                 <div class="microscope-section fade-in">
-                    <h3 data-en="Atomic Precision" data-zh="原子精度">Atomic Precision</h3>
+                    <h3 id="microscopy-title">Material Microscopy</h3>
                     <div class="microscope-images">
                         <div class="microscope-card">
-                            <div class="microscope-placeholder">
-                                <span data-en="Electron Microscopy Alpha" data-zh="电镜图像 Alpha">Electron Microscopy Alpha</span>
+                            <div class="microscope-image">
+                                <img src="img/sample_1.JPG" alt="Electron Microscope Image 1" onerror="this.parentElement.innerHTML='<div class=\'microscope-placeholder\'><span id=\'image1-placeholder\'>Electron Microscope Image 1</span></div>'">
                             </div>
-                            <p data-en="Advanced electron microscopy reveals the extraordinary nanostructure precision of our materials." data-zh="先进的电子显微镜揭示了我们材料的非凡纳米结构精度。">Advanced electron microscopy reveals the extraordinary nanostructure precision of our materials.</p>
+                            <p id="image1-description">High-resolution electron microscopy reveals the intricate nanostructure of our advanced materials.</p>
                         </div>
                         <div class="microscope-card">
-                            <div class="microscope-placeholder">
-                                <span data-en="Electron Microscopy Beta" data-zh="电镜图像 Beta">Electron Microscopy Beta</span>
+                            <div class="microscope-image">
+                                <img src="img/sample_2.JPG" alt="Electron Microscope Image 2" onerror="this.parentElement.innerHTML='<div class=\'microscope-placeholder\'><span id=\'image2-placeholder\'>Electron Microscope Image 2</span></div>'">
                             </div>
-                            <p data-en="Detailed atomic-level analysis showcasing breakthrough engineering at the molecular scale." data-zh="详细的原子级分析展示了分子尺度的突破性工程。">Detailed atomic-level analysis showcasing breakthrough engineering at the molecular scale.</p>
+                            <p id="image2-description">Detailed surface analysis showcasing the precision engineering at the atomic level.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Contact Section -->
         <section id="contact" class="section">
             <div class="contact fade-in">
-                <h2 data-en="Visionary Leaders" data-zh="远见领袖">Visionary Leaders</h2>
-                <p data-en="Connect with the pioneering minds behind YouWoo's revolutionary materials breakthrough." data-zh="与酉午革命性材料突破背后的先锋思想家联系。">Connect with the pioneering minds behind YouWoo's revolutionary materials breakthrough.</p>
+                <h2 id="contact-title">Meet Our Founders</h2>
+                <p id="contact-subtitle">Connect with the visionaries behind YouWoo's innovative materials research.</p>
                 
                 <div class="founders">
                     <div class="founder-card">
-                        <h3 data-en="Dr. [Founder Name 1]" data-zh="[创始人姓名1] 博士">Dr. [Founder Name 1]</h3>
-                        <p class="title" data-en="Co-Founder & Chief Technology Officer" data-zh="联合创始人兼首席技术官">Co-Founder & Chief Technology Officer</p>
+                        <h3 id="founder1-name">Dr. [Founder Name 1]</h3>
+                        <p class="title" id="founder1-title">Co-Founder & CTO</p>
                         <div class="contact-info">
-                            <p data-en="founder1@youwoo.com" data-zh="founder1@youwoo.com">founder1@youwoo.com</p>
-                            <p data-en="+1 (555) 123-4567" data-zh="+1 (555) 123-4567">+1 (555) 123-4567</p>
-                            <p data-en="linkedin.com/in/founder1" data-zh="linkedin.com/in/founder1">linkedin.com/in/founder1</p>
+                            <p id="founder1-email">Email: founder1@youwoo.com</p>
+                            <p id="founder1-phone">Phone: +1 (555) 123-4567</p>
+                            <p id="founder1-linkedin">LinkedIn: /in/founder1</p>
                         </div>
                     </div>
                     <div class="founder-card">
-                        <h3 data-en="Dr. [Founder Name 2]" data-zh="[创始人姓名2] 博士">Dr. [Founder Name 2]</h3>
-                        <p class="title" data-en="Co-Founder & Chief Executive Officer" data-zh="联合创始人兼首席执行官">Co-Founder & Chief Executive Officer</p>
+                        <h3 id="founder2-name">Dr. [Founder Name 2]</h3>
+                        <p class="title" id="founder2-title">Co-Founder & CEO</p>
                         <div class="contact-info">
-                            <p data-en="founder2@youwoo.com" data-zh="founder2@youwoo.com">founder2@youwoo.com</p>
-                            <p data-en="+1 (555) 123-4568" data-zh="+1 (555) 123-4568">+1 (555) 123-4568</p>
-                            <p data-en="linkedin.com/in/founder2" data-zh="linkedin.com/in/founder2">linkedin.com/in/founder2</p>
+                            <p id="founder2-email">Email: founder2@youwoo.com</p>
+                            <p id="founder2-phone">Phone: +1 (555) 123-4568</p>
+                            <p id="founder2-linkedin">LinkedIn: /in/founder2</p>
                         </div>
                     </div>
                 </div>
@@ -727,6 +520,100 @@
     </main>
 
     <script>
+        // Centralized content configuration
+        const CONTENT = {
+            en: {
+                // Navigation
+                'nav-home': 'Home',
+                'nav-materials': 'Materials',
+                'nav-contact': 'Contact',
+                
+                // Hero section
+                'hero-title': 'YouWoo',
+                'hero-subtitle': 'Advanced Materials Technology',
+                'hero-description': 'Pioneering the future of inorganic non-metallic materials with cutting-edge research in nitrides, ceramics, and oxides',
+                'hero-cta': 'Explore Our Materials',
+                
+                // Materials section
+                'materials-title': 'Our Focus Areas',
+                'nitrides-title': 'Nitrides',
+                'nitrides-description': 'Advanced nitride materials with exceptional hardness, thermal stability, and electrical properties for cutting-edge applications.',
+                'ceramics-title': 'Ceramics',
+                'ceramics-description': 'High-performance ceramic materials engineered for extreme environments and specialized industrial applications.',
+                'oxides-title': 'Oxides',
+                'oxides-description': 'Innovative oxide materials with tailored properties for electronics, energy storage, and catalysis applications.',
+                
+                // Microscopy section
+                'microscopy-title': 'Material Microscopy',
+                'image1-placeholder': 'Electron Microscope Image 1',
+                'image1-description': 'High-resolution electron microscopy reveals the intricate nanostructure of our advanced materials.',
+                'image2-placeholder': 'Electron Microscope Image 2',
+                'image2-description': 'Detailed surface analysis showcasing the precision engineering at the atomic level.',
+                
+                // Contact section
+                'contact-title': 'Meet Our Founders',
+                'contact-subtitle': 'Connect with the visionaries behind YouWoo\'s innovative materials research.',
+                'founder1-name': 'Dr. [Founder Name 1]',
+                'founder1-title': 'Co-Founder & CTO',
+                'founder1-email': 'Email: founder1@youwoo.com',
+                'founder1-phone': 'Phone: +1 (555) 123-4567',
+                'founder1-linkedin': 'LinkedIn: /in/founder1',
+                'founder2-name': 'Dr. [Founder Name 2]',
+                'founder2-title': 'Co-Founder & CEO',
+                'founder2-email': 'Email: founder2@youwoo.com',
+                'founder2-phone': 'Phone: +1 (555) 123-4568',
+                'founder2-linkedin': 'LinkedIn: /in/founder2'
+            },
+            zh: {
+                // Navigation
+                'nav-home': '首页',
+                'nav-materials': '材料',
+                'nav-contact': '联系',
+                
+                // Hero section
+                'hero-title': '酉午',
+                'hero-subtitle': '先进材料科技',
+                'hero-description': '专注氮化物、陶瓷、氧化物等无机非金属前沿材料的突破性研究，引领材料科技未来',
+                'hero-cta': '探索我们的材料',
+                
+                // Materials section
+                'materials-title': '我们的专业领域',
+                'nitrides-title': '氮化物',
+                'nitrides-description': '具有卓越硬度、热稳定性和电学性能的先进氮化物材料，适用于前沿应用领域。',
+                'ceramics-title': '陶瓷',
+                'ceramics-description': '专为极端环境和特殊工业应用而设计的高性能陶瓷材料。',
+                'oxides-title': '氧化物',
+                'oxides-description': '针对电子、储能和催化应用定制特性的创新氧化物材料。',
+                
+                // Microscopy section
+                'microscopy-title': '材料显微镜观察',
+                'image1-placeholder': '电子显微镜图像 1',
+                'image1-description': '高分辨率电子显微镜揭示了我们先进材料的复杂纳米结构。',
+                'image2-placeholder': '电子显微镜图像 2',
+                'image2-description': '详细的表面分析展示了原子级别的精密工程。',
+                
+                // Contact section
+                'contact-title': '认识我们的创始人',
+                'contact-subtitle': '与酉午创新材料研究背后的远见者联系。',
+                'founder1-name': '[创始人姓名1] 博士',
+                'founder1-title': '联合创始人兼技术总监',
+                'founder1-email': '邮箱: founder1@youwoo.com',
+                'founder1-phone': '电话: +1 (555) 123-4567',
+                'founder1-linkedin': '领英: /in/founder1',
+                'founder2-name': '[创始人姓名2] 博士',
+                'founder2-title': '联合创始人兼首席执行官',
+                'founder2-email': '邮箱: founder2@youwoo.com',
+                'founder2-phone': '电话: +1 (555) 123-4568',
+                'founder2-linkedin': '领英: /in/founder2'
+            }
+        };
+
+        // Configuration for images
+        const IMAGE_CONFIG = {
+            sample1: 'img/sample_1.JPG',
+            sample2: 'img/sample_2.JPG'
+        };
+
         let currentLang = 'en';
 
         function toggleLanguage() {
@@ -736,21 +623,27 @@
         }
 
         function updateContent() {
-            const elements = document.querySelectorAll('[data-en][data-zh]');
-            elements.forEach(element => {
-                const text = element.getAttribute(`data-${currentLang}`);
-                if (text) {
-                    element.textContent = text;
+            const content = CONTENT[currentLang];
+            Object.keys(content).forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.textContent = content[id];
                 }
             });
         }
 
         function updateLangButton() {
-            const button = document.querySelector('.lang-switch');
+            const button = document.getElementById('lang-btn');
             button.textContent = currentLang === 'en' ? '中文' : 'English';
         }
 
-        // Smooth scrolling
+        // Initialize content on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateContent();
+            updateLangButton();
+        });
+
+        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -764,7 +657,7 @@
             });
         });
 
-        // Advanced intersection observer
+        // Scroll animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
@@ -782,35 +675,24 @@
             observer.observe(el);
         });
 
-        // Dynamic header effects
+        // Header scroll effect
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
-            const scrolled = window.pageYOffset;
-            
-            if (scrolled > 100) {
+            if (window.scrollY > 100) {
                 header.style.background = 'rgba(10, 10, 10, 0.95)';
-                header.style.boxShadow = '0 5px 30px rgba(255, 215, 0, 0.2)';
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
             } else {
-                header.style.background = 'rgba(10, 10, 10, 0.9)';
+                header.style.background = 'rgba(10, 10, 10, 0.8)';
                 header.style.boxShadow = 'none';
             }
         });
 
-        // Parallax energy effect
+        // Parallax effect for background
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
-            const energyBg = document.querySelector('.background-energy');
-            const speed = scrolled * 0.3;
-            energyBg.style.transform = `translateY(${speed}px) scale(${1 + scrolled * 0.0001})`;
-        });
-
-        // Dynamic color shifting
-        window.addEventListener('mousemove', (e) => {
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            
-            document.documentElement.style.setProperty('--dynamic-hue', `${x * 20}deg`);
-            document.documentElement.style.setProperty('--dynamic-brightness', `${1 + y * 0.1}`);
+            const parallax = document.querySelector('.background-animation');
+            const speed = scrolled * 0.5;
+            parallax.style.transform = `translateY(${speed}px)`;
         });
     </script>
 </body>
