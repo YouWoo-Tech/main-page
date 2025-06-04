@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouWoo Materials Technology | 酉午材料科技</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-steel: #4a5568;
+            --secondary-slate: #2d3748;
+            --accent-ice: #7dd3fc;
+            --concrete-bg: #1a1f2e;
+            --darker-concrete: #0f1419;
+            --metal-text: #f7fafc;
+            --muted-text: #9ca3af;
+            --glass-frost: rgba(255, 255, 255, 0.02);
+            --steel-border: rgba(255, 255, 255, 0.08);
+            --industrial-accent: #38bdf8;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--concrete-bg);
+            color: var(--metal-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-weight: 300;
+        }
+
+        /* Industrial grid background */
+        .background-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                linear-gradient(rgba(74, 85, 104, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74, 85, 104, 0.03) 1px, transparent 1px),
+                linear-gradient(var(--concrete-bg), var(--darker-concrete));
+            background-size: 40px 40px, 40px 40px, 100% 100%;
+            animation: subtleShift 20s ease-in-out infinite;
+        }
+
+        @keyframes subtleShift {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(2px, 2px); }
+        }
+
+        /* Architectural header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 24px 40px;
+            background: rgba(26, 31, 46, 0.85);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--steel-border);
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 200;
+            letter-spacing: 4px;
+            color: var(--metal-text);
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 40%;
+            height: 1px;
+            background: var(--industrial-accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--muted-text);
+            text-decoration: none;
+            font-weight: 300;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.4s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--industrial-accent);
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--industrial-accent);
+            transition: width 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        .lang-switch {
+            background: var(--glass-frost);
+            border: 1px solid var(--steel-border);
+            border-radius: 2px;
+            padding: 12px 24px;
+            color: var(--muted-text);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-weight: 300;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .lang-switch:hover {
+            background: var(--steel-border);
+            color: var(--metal-text);
+            transform: translateY(-1px);
+        }
+
+        /* Minimal hero section */
+        .hero {
+            padding: 280px 40px 160px;
+            text-align: left;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 200px;
+            left: 40px;
+            width: 120px;
+            height: 1px;
+            background: var(--industrial-accent);
+        }
+
+        .hero h1 {
+            font-size: clamp(64px, 10vw, 120px);
+            font-weight: 100;
+            margin-bottom: 32px;
+            color: var(--metal-text);
+            letter-spacing: -2px;
+            line-height: 0.9;
+            animation: slideUp 1.2s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .hero .subtitle {
+            font-size: 18px;
+            color: var(--muted-text);
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 48px;
+            animation: slideUp 1.2s cubic-bezier(0.23, 1, 0.320, 1) 0.2s both;
+        }
+
+        .hero .description {
+            font-size: 16px;
+            color: var(--muted-text);
+            max-width: 560px;
+            margin-bottom: 64px;
+            font-weight: 300;
+            line-height: 1.8;
+            animation: slideUp 1.2s cubic-bezier(0.23, 1, 0.320, 1) 0.4s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 48px;
+            background: transparent;
+            color: var(--industrial-accent);
+            text-decoration: none;
+            border: 1px solid var(--industrial-accent);
+            font-weight: 300;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            animation: slideUp 1.2s cubic-bezier(0.23, 1, 0.320, 1) 0.6s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--industrial-accent);
+            transition: left 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            z-index: -1;
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        .cta-button:hover {
+            color: var(--concrete-bg);
+            transform: translateY(-2px);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Industrial materials section */
+        .section {
+            padding: 120px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .materials {
+            background: var(--glass-frost);
+            border: 1px solid var(--steel-border);
+            padding: 80px 60px;
+            margin: 80px 0;
+            position: relative;
+        }
+
+        .materials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: var(--industrial-accent);
+        }
+
+        .materials h2 {
+            font-size: 48px;
+            font-weight: 100;
+            margin-bottom: 80px;
+            color: var(--metal-text);
+            letter-spacing: -1px;
+            text-align: left;
+        }
+
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2px;
+        }
+
+        .material-card {
+            background: var(--glass-frost);
+            padding: 48px 32px;
+            border: 1px solid var(--steel-border);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .material-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 1px;
+            background: var(--industrial-accent);
+            transition: left 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .material-card:hover::before {
+            left: 0;
+        }
+
+        .material-card:hover {
+            background: rgba(255, 255, 255, 0.03);
+            transform: translateY(-4px);
+        }
+
+        .material-card h3 {
+            font-size: 20px;
+            font-weight: 300;
+            margin-bottom: 24px;
+            color: var(--industrial-accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .material-card p {
+            color: var(--muted-text);
+            line-height: 1.8;
+            font-weight: 300;
+            font-size: 14px;
+        }
+
+        /* Microscope section with architectural layout */
+        .microscope-section {
+            margin: 120px 0;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .microscope-info {
+            padding-right: 40px;
+        }
+
+        .microscope-info h3 {
+            font-size: 36px;
+            font-weight: 100;
+            margin-bottom: 32px;
+            color: var(--metal-text);
+            letter-spacing: -1px;
+        }
+
+        .microscope-info p {
+            color: var(--muted-text);
+            line-height: 1.8;
+            font-weight: 300;
+            margin-bottom: 24px;
+        }
+
+        .microscope-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+        }
+
+        .microscope-card {
+            aspect-ratio: 1;
+            background: var(--glass-frost);
+            border: 1px solid var(--steel-border);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .microscope-card:hover {
+            transform: scale(1.02);
+        }
+
+        .microscope-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--darker-concrete), var(--secondary-slate));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted-text);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 300;
+        }
+
+        /* Contact section with industrial grid */
+        .contact {
+            background: var(--glass-frost);
+            border: 1px solid var(--steel-border);
+            padding: 80px 60px;
+            margin: 80px 0;
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80px;
+            height: 2px;
+            background: var(--industrial-accent);
+        }
+
+        .contact h2 {
+            font-size: 48px;
+            font-weight: 100;
+            margin-bottom: 24px;
+            color: var(--metal-text);
+            letter-spacing: -1px;
+        }
+
+        .contact > p {
+            color: var(--muted-text);
+            margin-bottom: 80px;
+            font-weight: 300;
+            max-width: 600px;
+        }
+
+        .founders {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+        }
+
+        .founder-card {
+            background: var(--glass-frost);
+            padding: 48px 32px;
+            border: 1px solid var(--steel-border);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            position: relative;
+        }
+
+        .founder-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--industrial-accent);
+            transition: width 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .founder-card:hover::after {
+            width: 100%;
+        }
+
+        .founder-card:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .founder-card h3 {
+            font-size: 18px;
+            font-weight: 300;
+            margin-bottom: 8px;
+            color: var(--metal-text);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .founder-card .title {
+            color: var(--industrial-accent);
+            font-weight: 300;
+            margin-bottom: 32px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .founder-card .contact-info {
+            color: var(--muted-text);
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        .founder-card .contact-info p {
+            margin-bottom: 8px;
+        }
+
+        .founder-card .contact-info a {
+            color: var(--muted-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .founder-card .contact-info a:hover {
+            color: var(--industrial-accent);
+        }
+
+        /* Architectural animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .microscope-section {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            
+            .founders {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 24px;
+            }
+            
+            .section, .materials, .contact {
+                padding: 60px 20px;
+            }
+            
+            .hero {
+                padding: 200px 20px 120px;
+                text-align: left;
+            }
+            
+            .microscope-images {
+                grid-template-columns: 1fr;
+            }
+            
+            .materials-grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-grid"></div>
+    
+    <header>
+        <nav>
+            <div class="logo">YouWoo | 酉午</div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link" data-en="Home" data-zh="首页">Home</a>
+                <a href="#materials" class="nav-link" data-en="Materials" data-zh="材料">Materials</a>
+                <a href="#contact" class="nav-link" data-en="Contact" data-zh="联系">Contact</a>
+                <button class="lang-switch" onclick="toggleLanguage()">中文</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <h1 class="hero-title" data-en="YouWoo" data-zh="酉午">YouWoo</h1>
+            <p class="subtitle" data-en="Advanced Materials Technology" data-zh="先进材料科技">Advanced Materials Technology</p>
+            <p class="description" data-en="Pioneering the future of inorganic non-metallic materials with cutting-edge research in nitrides, ceramics, and oxides" data-zh="专注氮化物、陶瓷、氧化物等无机非金属前沿材料的突破性研究，引领材料科技未来">Pioneering the future of inorganic non-metallic materials with cutting-edge research in nitrides, ceramics, and oxides</p>
+            <a href="#materials" class="cta-button" data-en="Explore Materials" data-zh="探索材料">Explore Materials</a>
+        </section>
+
+        <section id="materials" class="section">
+            <div class="materials fade-in">
+                <h2 data-en="Material Focus" data-zh="材料专注">Material Focus</h2>
+                <div class="materials-grid">
+                    <div class="material-card">
+                        <h3 data-en="Nitrides" data-zh="氮化物">Nitrides</h3>
+                        <p data-en="Advanced nitride materials with exceptional hardness, thermal stability, and electrical properties for cutting-edge applications." data-zh="具有卓越硬度、热稳定性和电学性能的先进氮化物材料，适用于前沿应用领域。">Advanced nitride materials with exceptional hardness, thermal stability, and electrical properties for cutting-edge applications.</p>
+                    </div>
+                    <div class="material-card">
+                        <h3 data-en="Ceramics" data-zh="陶瓷">Ceramics</h3>
+                        <p data-en="High-performance ceramic materials engineered for extreme environments and specialized industrial applications." data-zh="专为极端环境和特殊工业应用而设计的高性能陶瓷材料。">High-performance ceramic materials engineered for extreme environments and specialized industrial applications.</p>
+                    </div>
+                    <div class="material-card">
+                        <h3 data-en="Oxides" data-zh="氧化物">Oxides</h3>
+                        <p data-en="Innovative oxide materials with tailored properties for electronics, energy storage, and catalysis applications." data-zh="针对电子、储能和催化应用定制特性的创新氧化物材料。">Innovative oxide materials with tailored properties for electronics, energy storage, and catalysis applications.</p>
+                    </div>
+                </div>
+                
+                <div class="microscope-section fade-in">
+                    <div class="microscope-info">
+                        <h3 data-en="Microscopic Analysis" data-zh="显微分析">Microscopic Analysis</h3>
+                        <p data-en="High-resolution electron microscopy reveals the intricate nanostructure and atomic-level engineering of our advanced materials." data-zh="高分辨率电子显微镜揭示了我们先进材料的复杂纳米结构和原子级工程。">High-resolution electron microscopy reveals the intricate nanostructure and atomic-level engineering of our advanced materials.</p>
+                        <p data-en="Precision characterization enables optimal material performance." data-zh="精确表征确保最佳材料性能。">Precision characterization enables optimal material performance.</p>
+                    </div>
+                    <div class="microscope-images">
+                        <div class="microscope-card">
+                            <div class="microscope-placeholder">
+                                <span data-en="Microscopy 01" data-zh="显微镜图 01">Microscopy 01</span>
+                            </div>
+                        </div>
+                        <div class="microscope-card">
+                            <div class="microscope-placeholder">
+                                <span data-en="Microscopy 02" data-zh="显微镜图 02">Microscopy 02</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="contact fade-in">
+                <h2 data-en="Leadership" data-zh="领导团队">Leadership</h2>
+                <p data-en="Connect with the visionaries driving YouWoo's materials innovation." data-zh="与推动酉午材料创新的远见者联系。">Connect with the visionaries driving YouWoo's materials innovation.</p>
+                
+                <div class="founders">
+                    <div class="founder-card">
+                        <h3 data-en="Dr. [Founder Name 1]" data-zh="[创始人姓名1] 博士">Dr. [Founder Name 1]</h3>
+                        <p class="title" data-en="Co-Founder & CTO" data-zh="联合创始人兼技术总监">Co-Founder & CTO</p>
+                        <div class="contact-info">
+                            <p data-en="founder1@youwoo.com" data-zh="founder1@youwoo.com">founder1@youwoo.com</p>
+                            <p data-en="+1 (555) 123-4567" data-zh="+1 (555) 123-4567">+1 (555) 123-4567</p>
+                            <p data-en="linkedin.com/in/founder1" data-zh="linkedin.com/in/founder1">linkedin.com/in/founder1</p>
+                        </div>
+                    </div>
+                    <div class="founder-card">
+                        <h3 data-en="Dr. [Founder Name 2]" data-zh="[创始人姓名2] 博士">Dr. [Founder Name 2]</h3>
+                        <p class="title" data-en="Co-Founder & CEO" data-zh="联合创始人兼首席执行官">Co-Founder & CEO</p>
+                        <div class="contact-info">
+                            <p data-en="founder2@youwoo.com" data-zh="founder2@youwoo.com">founder2@youwoo.com</p>
+                            <p data-en="+1 (555) 123-4568" data-zh="+1 (555) 123-4568">+1 (555) 123-4568</p>
+                            <p data-en="linkedin.com/in/founder2" data-zh="linkedin.com/in/founder2">linkedin.com/in/founder2</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'zh' : 'en';
+            updateContent();
+            updateLangButton();
+        }
+
+        function updateContent() {
+            const elements = document.querySelectorAll('[data-en][data-zh]');
+            elements.forEach(element => {
+                const text = element.getAttribute(`data-${currentLang}`);
+                if (text) {
+                    element.textContent = text;
+                }
+            });
+        }
+
+        function updateLangButton() {
+            const button = document.querySelector('.lang-switch');
+            button.textContent = currentLang === 'en' ? '中文' : 'English';
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(26, 31, 46, 0.95)';
+            } else {
+                header.style.background = 'rgba(26, 31, 46, 0.85)';
+            }
+        });
+    </script>
+</body>
+</html>
