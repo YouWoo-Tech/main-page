@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouWoo Materials Technology | 酉午材料科技</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0066ff;
+            --secondary-blue: #0052cc;
+            --accent-cyan: #00d4ff;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --light-text: #ffffff;
+            --gray-text: #a0a0a0;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--dark-bg);
+            color: var(--light-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, var(--dark-bg), var(--darker-bg));
+        }
+
+        .background-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(0, 102, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.8; }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 40px;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-cyan);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .lang-switch {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 8px 20px;
+            color: var(--light-text);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .lang-switch:hover {
+            background: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Main sections */
+        .section {
+            padding: 120px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 200px 40px 120px;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 800;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--light-text), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero .subtitle {
+            font-size: 24px;
+            color: var(--gray-text);
+            margin-bottom: 50px;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero .description {
+            font-size: 18px;
+            color: var(--gray-text);
+            max-width: 800px;
+            margin: 0 auto 50px;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-cyan));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.6s both;
+            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 102, 255, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Materials showcase */
+        .materials {
+            background: var(--glass-bg);
+            border-radius: 30px;
+            padding: 80px 60px;
+            margin: 80px 0;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+        }
+
+        .materials h2 {
+            font-size: 48px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, var(--light-text), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .material-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .material-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .material-card h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--accent-cyan);
+        }
+
+        .material-card p {
+            color: var(--gray-text);
+            line-height: 1.8;
+        }
+
+        /* Microscope images */
+        .microscope-section {
+            text-align: center;
+            margin: 80px 0;
+        }
+
+        .microscope-section h3 {
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            color: var(--light-text);
+        }
+
+        .microscope-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .microscope-card {
+            background: var(--glass-bg);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .microscope-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .microscope-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-text);
+            font-size: 18px;
+            margin-bottom: 20px;
+            border: 2px dashed var(--glass-border);
+        }
+
+        /* Contact section */
+        .contact {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            border-radius: 30px;
+            padding: 80px 60px;
+            margin: 80px 0;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 60px;
+        }
+
+        .founders {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .founder-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .founder-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .founder-card h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .founder-card .title {
+            color: var(--accent-cyan);
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .founder-card .contact-info {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .founder-card .contact-info a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .founder-card .contact-info a:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Language toggle */
+        .hidden {
+            display: none;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 20px;
+            }
+            
+            .section, .materials, .contact {
+                padding: 60px 20px;
+            }
+            
+            .hero {
+                padding: 150px 20px 80px;
+            }
+            
+            .microscope-images {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation"></div>
+    
+    <header>
+        <nav>
+            <div class="logo">YouWoo | 酉午</div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link" data-en="Home" data-zh="首页">Home</a>
+                <a href="#materials" class="nav-link" data-en="Materials" data-zh="材料">Materials</a>
+                <a href="#contact" class="nav-link" data-en="Contact" data-zh="联系">Contact</a>
+                <button class="lang-switch" onclick="toggleLanguage()">中文</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <h1 class="hero-title" data-en="YouWoo" data-zh="酉午">YouWoo</h1>
+            <p class="subtitle" data-en="Advanced Materials Technology" data-zh="先进材料科技">Advanced Materials Technology</p>
+            <p class="description" data-en="Pioneering the future of inorganic non-metallic materials with cutting-edge research in nitrides, ceramics, and oxides" data-zh="专注氮化物、陶瓷、氧化物等无机非金属前沿材料的突破性研究，引领材料科技未来">Pioneering the future of inorganic non-metallic materials with cutting-edge research in nitrides, ceramics, and oxides</p>
+            <a href="#materials" class="cta-button" data-en="Explore Our Materials" data-zh="探索我们的材料">Explore Our Materials</a>
+        </section>
+
+        <!-- Materials Section -->
+        <section id="materials" class="section">
+            <div class="materials fade-in">
+                <h2 data-en="Our Focus Areas" data-zh="我们的专业领域">Our Focus Areas</h2>
+                <div class="materials-grid">
+                    <div class="material-card">
+                        <h3 data-en="Nitrides" data-zh="氮化物">Nitrides</h3>
+                        <p data-en="Advanced nitride materials with exceptional hardness, thermal stability, and electrical properties for cutting-edge applications." data-zh="具有卓越硬度、热稳定性和电学性能的先进氮化物材料，适用于前沿应用领域。">Advanced nitride materials with exceptional hardness, thermal stability, and electrical properties for cutting-edge applications.</p>
+                    </div>
+                    <div class="material-card">
+                        <h3 data-en="Ceramics" data-zh="陶瓷">Ceramics</h3>
+                        <p data-en="High-performance ceramic materials engineered for extreme environments and specialized industrial applications." data-zh="专为极端环境和特殊工业应用而设计的高性能陶瓷材料。">High-performance ceramic materials engineered for extreme environments and specialized industrial applications.</p>
+                    </div>
+                    <div class="material-card">
+                        <h3 data-en="Oxides" data-zh="氧化物">Oxides</h3>
+                        <p data-en="Innovative oxide materials with tailored properties for electronics, energy storage, and catalysis applications." data-zh="针对电子、储能和催化应用定制特性的创新氧化物材料。">Innovative oxide materials with tailored properties for electronics, energy storage, and catalysis applications.</p>
+                    </div>
+                </div>
+                
+                <div class="microscope-section fade-in">
+                    <h3 data-en="Material Microscopy" data-zh="材料显微镜观察">Material Microscopy</h3>
+                    <div class="microscope-images">
+                        <div class="microscope-card">
+                            <div class="microscope-placeholder">
+                                <span data-en="Electron Microscope Image 1" data-zh="电子显微镜图像 1">Electron Microscope Image 1</span>
+                            </div>
+                            <p data-en="High-resolution electron microscopy reveals the intricate nanostructure of our advanced materials." data-zh="高分辨率电子显微镜揭示了我们先进材料的复杂纳米结构。">High-resolution electron microscopy reveals the intricate nanostructure of our advanced materials.</p>
+                        </div>
+                        <div class="microscope-card">
+                            <div class="microscope-placeholder">
+                                <span data-en="Electron Microscope Image 2" data-zh="电子显微镜图像 2">Electron Microscope Image 2</span>
+                            </div>
+                            <p data-en="Detailed surface analysis showcasing the precision engineering at the atomic level." data-zh="详细的表面分析展示了原子级别的精密工程。">Detailed surface analysis showcasing the precision engineering at the atomic level.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="contact fade-in">
+                <h2 data-en="Meet Our Founders" data-zh="认识我们的创始人">Meet Our Founders</h2>
+                <p data-en="Connect with the visionaries behind YouWoo's innovative materials research." data-zh="与酉午创新材料研究背后的远见者联系。">Connect with the visionaries behind YouWoo's innovative materials research.</p>
+                
+                <div class="founders">
+                    <div class="founder-card">
+                        <h3 data-en="Dr. [Founder Name 1]" data-zh="[创始人姓名1] 博士">Dr. [Founder Name 1]</h3>
+                        <p class="title" data-en="Co-Founder & CTO" data-zh="联合创始人兼技术总监">Co-Founder & CTO</p>
+                        <div class="contact-info">
+                            <p data-en="Email: founder1@youwoo.com" data-zh="邮箱: founder1@youwoo.com">Email: founder1@youwoo.com</p>
+                            <p data-en="Phone: +1 (555) 123-4567" data-zh="电话: +1 (555) 123-4567">Phone: +1 (555) 123-4567</p>
+                            <p data-en="LinkedIn: /in/founder1" data-zh="领英: /in/founder1">LinkedIn: /in/founder1</p>
+                        </div>
+                    </div>
+                    <div class="founder-card">
+                        <h3 data-en="Dr. [Founder Name 2]" data-zh="[创始人姓名2] 博士">Dr. [Founder Name 2]</h3>
+                        <p class="title" data-en="Co-Founder & CEO" data-zh="联合创始人兼首席执行官">Co-Founder & CEO</p>
+                        <div class="contact-info">
+                            <p data-en="Email: founder2@youwoo.com" data-zh="邮箱: founder2@youwoo.com">Email: founder2@youwoo.com</p>
+                            <p data-en="Phone: +1 (555) 123-4568" data-zh="电话: +1 (555) 123-4568">Phone: +1 (555) 123-4568</p>
+                            <p data-en="LinkedIn: /in/founder2" data-zh="领英: /in/founder2">LinkedIn: /in/founder2</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'zh' : 'en';
+            updateContent();
+            updateLangButton();
+        }
+
+        function updateContent() {
+            const elements = document.querySelectorAll('[data-en][data-zh]');
+            elements.forEach(element => {
+                const text = element.getAttribute(`data-${currentLang}`);
+                if (text) {
+                    element.textContent = text;
+                }
+            });
+        }
+
+        function updateLangButton() {
+            const button = document.querySelector('.lang-switch');
+            button.textContent = currentLang === 'en' ? '中文' : 'English';
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(10, 10, 10, 0.95)';
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
+            } else {
+                header.style.background = 'rgba(10, 10, 10, 0.8)';
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // Parallax effect for background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.background-animation');
+            const speed = scrolled * 0.5;
+            parallax.style.transform = `translateY(${speed}px)`;
+        });
+    </script>
+</body>
+</html>
